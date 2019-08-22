@@ -8,7 +8,9 @@
 # eks. om det er logisk med 2 ord så får vi en     #
 # underscore: variable_name                        #
 #                                                  #
-# Løkker får en linje mellomrom ned til ny løkke   #
+# Løkker får en ny linje mellomrom ned til ny      #
+# løkke.                                           #
+#                                                  #
 #                                                  #
 ####################################################
 
