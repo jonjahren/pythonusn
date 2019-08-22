@@ -16,11 +16,17 @@
 
 import random as ra
 
-dictionary_list = open("ordbok", "r").readlines() # Leser inn alle linjene fra tekstfil "ordbok"
+# Leser inn alle linjene fra tekstfil "ordbok"
 
-word_count = len(dictionary_list) # Length for å finne hvor mange ord i ordboka
+dictionary_list = open("ordbok", "r").readlines() 
 
-select_random = ra.randint(0, word_count-1) # -1 for å unngå out of bounds, velger et tilfeldig ord tall
+# Length for å finne hvor mange ord i ordboka
+
+word_count = len(dictionary_list) 
+
+# -1 for å unngå out of bounds, velger et tilfeldig ord fra ordboken
+
+select_random = ra.randint(0, word_count-1) 
 
 # strip() fjerner trailing whitespace, og dette bruker det tilfeldiget tallet for å 
 # velge et ord fra ordlisten
@@ -38,7 +44,7 @@ guess_word = [] # Denne variabelen lagrer hvilket ord som blir gjettet
 max_guesses = 12 # Hvor mange forsøk man har brukt
 used_letters = [] # Hvilke bokstaver som er brukt
 input_to_list= [] # Denne er lagret for å gjøre om input streng til liste
-guesses = 0
+guesses = 0 # Hvor mange ganger du har gjettet på en bokstav
 input_letter = [] # Må defineres før while()
 
 # Denne for-løkken populerer gjetteordet med underscores
@@ -122,6 +128,7 @@ while True:
         print("Du har brukt for mange forsøk, mannen ble hengt.")
     
     guesses = guesses + 1
+    used_letters.sort()
     print(random_word_to_list)
     print(guess_word)
     print(used_letters)
