@@ -1,5 +1,16 @@
+####################################################
+# Variabler får navn etter C-konvensjon.           #
+# eks. om det er logisk med 2 ord så får vi en     #
+# underscore: variable_name                        #
+#                                                  #
+# Løkker får en ny linje mellomrom ned til ny      #
+# løkke.                                           #
+#                                                  #
+#                                                  #
+####################################################
+
 import sys
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMainWindow, QLabel, QGridLayout, QWidget, QPushButton
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QLineEdit
@@ -26,6 +37,13 @@ class HangmanWindow(QMainWindow):
         gridLayout.addWidget(title, 0, 0)
         
         
+        ######################################################
+        #                                                    #
+        # Denne funksjonen er unødvendig lang, om vi hadde   #
+        # hatt mer tid skulle denne blitt ryddet oppp        #
+        # og debug-prints blitt fjernet                      #
+        #                                                    #
+        ######################################################
         
         def enter_press():
             print(hmf.random_word)
@@ -42,7 +60,14 @@ class HangmanWindow(QMainWindow):
             input_letter_show.setText(used_letters_string)
             guess_word_output = ''.join(hmf.guess_word)
             guess_word_show.setText(guess_word_output)
-            
+         
+        ##########################################
+        # Enkle knappe-definisjoner for hva      #
+        # som skal skje når man trykker på       #
+        # en knapp.                              #
+        #                                        #
+        ##########################################
+        
         def knapp1_clicked():
             print(hmf.random_word)
         
@@ -53,16 +78,33 @@ class HangmanWindow(QMainWindow):
             value = enter_press
             print(value)
         
+        ##############################################
+        #                                            #
+        # QLabel er en funksjon for å printe tekst   #
+        # til standard-vinduet som lages.            #
+        #                                            #
+        #                                            #
+        ##############################################
+        
         input_letter_show = QLabel(hangman)
         input_letter_show.setText(hmf.input_letter)
-        input_letter_show.move(120, 350)
+        input_letter_show.move(250, 400)
+        input_letter_show.setFont(QtGui.QFont("Times", 24, QtGui.QFont.Bold))
         input_letter_show.show()
         
         guess_word_show = QLabel(hangman)
         guess_word_show.setText(guess_word_output)
-        guess_word_show.move(60, 350)
+        guess_word_show.move(90, 400)
+        guess_word_show.setFont(QtGui.QFont("Times", 24, QtGui.QFont.Bold))
         guess_word_show.show()
             
+        ##########################################
+        #                                        #
+        #                                        #
+        # Setter opp trykk-knapper               #
+        #                                        #
+        ##########################################
+        
         knapp1 = QPushButton(hangman)
         knapp1.setText("Skriv inn løsningsord")
         knapp1.move(150, 520)
@@ -78,6 +120,16 @@ class HangmanWindow(QMainWindow):
         knapp3.setText("Nytt spill")
         knapp3.move(380, 520)
         knapp3.clicked.connect(knapp3_clicked)
+        
+        ########################################
+        #                                      #
+        # QLineEdit gir oss en tekst-boks som  #
+        # vi kan skrive input i.               #
+        # returnPressed.connect betyr at       #
+        # funksjonen i parantes blir kjørt når #
+        # man trykker enter.                   #
+        #                                      #
+        ########################################
         
         hangman.input_box = QLineEdit(hangman)
         hangman.nameLabel = QLabel(hangman)
