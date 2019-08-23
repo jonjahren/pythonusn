@@ -68,12 +68,8 @@ for i in range(len(random_word_to_list)):
 # alfabetLower = list(string.ascii_lowercase) overflødig
 # alfabetUpper = list(string.ascii_uppercase) overflødig
 
-
-print(random_word)
-print(guess_word)
-
 while True:
-    print("Tast bokstav for å gjette:")
+    print("Velkommen til hangman, ordet du skal gjette er", len(random_word), "tegn langt")
     
     index_number = [] # Denne variabelen lagrer hvilken index bokstavene er i
     input_letter = input() # Dette blir en string. 
@@ -142,12 +138,11 @@ while True:
     if guesses >= max_guesses:
         select_random_lose = ra.randint(0, lose_count_messages-1)
         random_lose_message = lose_messages[select_random_lose].strip()
-        print(random_lose_message)
+        print(random_lose_message, "og det trivielle ordet du skulle finne var:", ''.join(random_word_to_list))
         break
     
     guesses = guesses + 1
     used_letters.sort()
-    print(random_word_to_list)
     print(guess_word)
     print(used_letters)
 
