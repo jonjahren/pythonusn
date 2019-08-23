@@ -2,10 +2,10 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QGridLayout, QWidget, QPushButton
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QLineEdit, QVBoxLayout, QTextBrowser
-from hangman_funksjoner import *    
+from PyQt5.QtWidgets import QLineEdit
+import hangman_funksjoner as hmf
 
-guess_word_output = ''.join(guess_word)
+guess_word_output = ''.join(hmf.guess_word)
 
 class HangmanWindow(QMainWindow):
     def __init__(hangman):
@@ -25,22 +25,43 @@ class HangmanWindow(QMainWindow):
         title.setAlignment(QtCore.Qt.AlignHCenter)
         gridLayout.addWidget(title, 0, 0)
         
-        guess_word_show = QLabel(hangman)
-        guess_word_show.setText(guess_word_output)
-        guess_word_show.move(700, 350)
-        guess_word_show.show()
         
+        
+        def enter_press():
+            print(hmf.random_word)
+            enter_value = hangman.input_box.text()
+            print(type(enter_value))
+            hmf.input_letter = enter_value
+            hmf.solve_index = hmf.find_placement(hmf.input_letter)
+            print(hmf.solve_index)
+            print(hmf.input_letter)
+            hmf.check_input()
+            hmf.solve_word()
+            hangman.input_box.clear()
+            used_letters_string = ''.join(hmf.used_letters)
+            input_letter_show.setText(used_letters_string)
+            guess_word_output = ''.join(hmf.guess_word)
+            guess_word_show.setText(guess_word_output)
+            
         def knapp1_clicked():
-            print(random_word)
+            print(hmf.random_word)
         
         def knapp2_clicked():
             sys.exit()
         
         def knapp3_clicked():
-            print(find_placement(hangman.input_box.text))
+            value = enter_press
+            print(value)
         
-        def enter_press():
-            find_placement(hangman.input_box.text)
+        input_letter_show = QLabel(hangman)
+        input_letter_show.setText(hmf.input_letter)
+        input_letter_show.move(120, 350)
+        input_letter_show.show()
+        
+        guess_word_show = QLabel(hangman)
+        guess_word_show.setText(guess_word_output)
+        guess_word_show.move(60, 350)
+        guess_word_show.show()
             
         knapp1 = QPushButton(hangman)
         knapp1.setText("Skriv inn løsningsord")
@@ -66,7 +87,7 @@ class HangmanWindow(QMainWindow):
         hangman.input_box.resize(200, 32)
         hangman.nameLabel.move(32, 460)
         hangman.nameLabel.resize(200, 32)
-        hangman.input_box.editingFinished.connect(enter_press)
+        hangman.input_box.returnPressed.connect(enter_press)
         
         
         

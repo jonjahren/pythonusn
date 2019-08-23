@@ -61,9 +61,9 @@ input_letter = ""
 for i in range(len(random_word_to_list)):
     guess_word.append("_")
 
-print(random_word)
-print(guess_word)
-input_letter = input("Yo")    
+#print(random_word)
+#print(guess_word)
+   
 
 
 ###############################################
@@ -96,11 +96,9 @@ def find_placement(string_to_find):
     for index in range(len(random_word_to_list)):
         if random_word_to_list[index] == string_to_find:
             index_number.append(index)
-            return index_number
-            print(index_number)
-        else:
-            return False
-            print(index_number)            
+    return index_number
+
+solve_index = find_placement(input_letter)
 
 ##########################################################
 # Funksjon som undersøker om bokstaven finnes i ordet,   #
@@ -110,18 +108,17 @@ def find_placement(string_to_find):
 ##########################################################      
 
 def check_input():
-    if find_placement:
+    if solve_index:
         print("Denne bokstaven finnes i ordet")
         if input_letter in used_letters:
             print("Men denne bokstaven er allerede brukt")
         else:
             used_letters.append(input_letter)
-    if not find_placement:
+    if not solve_index:
         print("Denne bokstaven finnes ikke i ordet")
         if input_letter not in used_letters:
-            used_letters.append(input_letter)            
+                used_letters.append(input_letter)  
 
-
-find_placement(input_letter)
-check_input()
-print(used_letters)
+def solve_word():
+    for index in solve_index:
+        guess_word[index] =  input_letter
